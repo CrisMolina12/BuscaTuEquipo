@@ -135,8 +135,8 @@ export default function AuthPage() {
   // Mostrar loading mientras verifica sesión
   if (checkingAuth) {
     return (
-      <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-400 via-blue-500 to-purple-600">
-        <div className="text-white text-xl">Verificando sesión...</div>
+      <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-400 via-blue-500 to-purple-600 px-4">
+        <div className="text-white text-base sm:text-lg lg:text-xl">Verificando sesión...</div>
       </main>
     )
   }
@@ -145,23 +145,23 @@ export default function AuthPage() {
     return (
       <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-400 via-blue-500 to-purple-600 p-4">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-10 left-10 text-white/10 text-9xl">⚽</div>
-          <div className="absolute bottom-20 right-20 text-white/10 text-9xl">⚽</div>
-          <div className="absolute top-1/2 right-10 text-white/10 text-7xl">⚽</div>
+          <div className="absolute top-10 left-10 text-white/10 text-6xl sm:text-9xl">⚽</div>
+          <div className="absolute bottom-20 right-20 text-white/10 text-6xl sm:text-9xl">⚽</div>
+          <div className="absolute top-1/2 right-10 text-white/10 text-5xl sm:text-7xl">⚽</div>
         </div>
 
-        <div className="relative bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md space-y-6 backdrop-blur-sm text-center">
-          <div className="text-6xl mb-4">📧</div>
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
+        <div className="relative bg-white p-6 sm:p-8 rounded-xl sm:rounded-2xl shadow-2xl w-full max-w-md space-y-4 sm:space-y-6 backdrop-blur-sm text-center">
+          <div className="text-5xl sm:text-6xl mb-3 sm:mb-4">📧</div>
+          <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
             ¡Revisa tu correo!
           </h1>
-          <p className="text-gray-600">
-            Te hemos enviado un correo electrónico a <strong className="text-blue-600">{email}</strong>
+          <p className="text-sm sm:text-base text-gray-600">
+            Te hemos enviado un correo electrónico a <strong className="text-blue-600 break-all">{email}</strong>
           </p>
-          <p className="text-gray-600 text-sm">
+          <p className="text-xs sm:text-sm text-gray-600">
             Por favor, haz clic en el enlace de confirmación para activar tu cuenta y completar tu perfil.
           </p>
-          <div className="bg-blue-50 border border-blue-200 text-blue-700 px-4 py-3 rounded-lg text-sm">
+          <div className="bg-blue-50 border border-blue-200 text-blue-700 px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg text-xs sm:text-sm">
             💡 No olvides revisar tu carpeta de spam si no ves el correo.
           </div>
           <button
@@ -169,7 +169,7 @@ export default function AuthPage() {
               setShowEmailConfirmation(false)
               setIsRegister(false)
             }}
-            className="w-full bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700 text-white font-semibold p-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
+            className="w-full bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700 text-white font-semibold p-2.5 sm:p-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 text-sm sm:text-base"
           >
             Volver al inicio de sesión
           </button>
@@ -181,36 +181,36 @@ export default function AuthPage() {
   return (
     <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-400 via-blue-500 to-purple-600 p-4">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-10 left-10 text-white/10 text-9xl">⚽</div>
-        <div className="absolute bottom-20 right-20 text-white/10 text-9xl">⚽</div>
-        <div className="absolute top-1/2 right-10 text-white/10 text-7xl">⚽</div>
+        <div className="absolute top-10 left-10 text-white/10 text-6xl sm:text-9xl">⚽</div>
+        <div className="absolute bottom-20 right-20 text-white/10 text-6xl sm:text-9xl">⚽</div>
+        <div className="absolute top-1/2 right-10 text-white/10 text-5xl sm:text-7xl">⚽</div>
       </div>
 
       <form
         onSubmit={handleSubmit}
-        className="relative bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md space-y-6 backdrop-blur-sm"
+        className="relative bg-white p-6 sm:p-8 rounded-xl sm:rounded-2xl shadow-2xl w-full max-w-md space-y-5 sm:space-y-6 backdrop-blur-sm"
       >
-        <div className="text-center space-y-2">
-          <div className="text-5xl mb-2">⚽</div>
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
+        <div className="text-center space-y-1.5 sm:space-y-2">
+          <div className="text-4xl sm:text-5xl mb-1.5 sm:mb-2">⚽</div>
+          <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
             BuscaTuEquipo
           </h1>
-          <p className="text-gray-600 text-sm">{isRegister ? "Crea tu cuenta" : "Inicia sesión"}</p>
+          <p className="text-gray-600 text-xs sm:text-sm">{isRegister ? "Crea tu cuenta" : "Inicia sesión"}</p>
         </div>
 
         {errorMessage && (
-          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+          <div className="bg-red-50 border border-red-200 text-red-700 px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg text-xs sm:text-sm">
             {errorMessage}
           </div>
         )}
 
-        <div className="space-y-4">
+        <div className="space-y-3.5 sm:space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Correo electrónico</label>
+            <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5 sm:mb-2">Correo electrónico</label>
             <input
               type="email"
               placeholder="tu@email.com"
-              className="w-full border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 p-3 rounded-lg transition-all duration-200 outline-none"
+              className="w-full border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 p-2.5 sm:p-3 rounded-lg transition-all duration-200 outline-none text-sm sm:text-base"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -218,11 +218,11 @@ export default function AuthPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Contraseña</label>
+            <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5 sm:mb-2">Contraseña</label>
             <input
               type="password"
               placeholder="••••••••"
-              className="w-full border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 p-3 rounded-lg transition-all duration-200 outline-none"
+              className="w-full border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 p-2.5 sm:p-3 rounded-lg transition-all duration-200 outline-none text-sm sm:text-base"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -232,9 +232,9 @@ export default function AuthPage() {
 
           {isRegister && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">¿Cómo te registras?</label>
+              <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5 sm:mb-2">¿Cómo te registras?</label>
               <select
-                className="w-full border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 p-3 rounded-lg transition-all duration-200 outline-none bg-white"
+                className="w-full border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 p-2.5 sm:p-3 rounded-lg transition-all duration-200 outline-none bg-white text-sm sm:text-base"
                 value={rol}
                 onChange={(e) => setRol(e.target.value as "jugador" | "club")}
               >
@@ -248,14 +248,14 @@ export default function AuthPage() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700 text-white font-semibold p-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700 text-white font-semibold p-2.5 sm:p-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
         >
           {loading ? "Cargando..." : isRegister ? "✨ Crear cuenta" : "🚀 Ingresar"}
         </button>
 
-        <div className="text-center pt-2">
+        <div className="text-center pt-1 sm:pt-2">
           <p
-            className="text-sm cursor-pointer text-blue-600 hover:text-blue-800 font-medium transition-colors"
+            className="text-xs sm:text-sm cursor-pointer text-blue-600 hover:text-blue-800 font-medium transition-colors"
             onClick={() => {
               setIsRegister(!isRegister)
               setErrorMessage("")

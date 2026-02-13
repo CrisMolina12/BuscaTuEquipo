@@ -184,12 +184,12 @@ export default function PublicacionesTab({ profile }: { profile: Profile }) {
   }
 
   // Obtener valores únicos para los filtros
-    const getUniqueValues = (field: keyof NonNullable<Publicacion["profiles"]>) => {
-      const values = publicaciones
-        .map(pub => pub.profiles?.[field])
-        .filter((value): value is string => value !== null && value !== undefined && value !== "")
-      return [...new Set(values)].sort()
-    }
+  const getUniqueValues = (field: keyof NonNullable<Publicacion["profiles"]>) => {
+    const values = publicaciones
+      .map(pub => pub.profiles?.[field])
+      .filter((value): value is string => value !== null && value !== undefined && value !== "")
+    return [...new Set(values)].sort()
+  }
 
   const posiciones = ["Portero", "Defensa", "Mediocampista", "Delantero"]
   const diasSemana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
@@ -197,10 +197,10 @@ export default function PublicacionesTab({ profile }: { profile: Profile }) {
 
   if (loading) {
     return (
-      <div className="flex justify-center py-16">
-        <div className="text-center">
-          <div className="w-12 h-12 border-3 border-slate-200 border-t-emerald-600 rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-slate-600 font-medium">Cargando publicaciones...</p>
+      <div className="flex justify-center py-12 sm:py-16">
+        <div className="text-center px-4">
+          <div className="w-10 h-10 sm:w-12 sm:h-12 border-3 border-slate-200 border-t-emerald-600 rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-slate-600 font-medium text-sm sm:text-base">Cargando publicaciones...</p>
         </div>
       </div>
     )
@@ -208,10 +208,10 @@ export default function PublicacionesTab({ profile }: { profile: Profile }) {
 
   if (error) {
     return (
-      <div className="bg-red-50 border border-red-200 rounded-2xl p-8">
-        <h3 className="text-red-900 font-bold mb-2 text-lg">Error al cargar</h3>
-        <p className="text-red-700 mb-4">{error}</p>
-        <button onClick={loadPublicaciones} className="bg-red-600 hover:bg-red-700 text-white px-6 py-2.5 rounded-xl font-medium transition-colors">
+      <div className="bg-red-50 border border-red-200 rounded-xl sm:rounded-2xl p-6 sm:p-8">
+        <h3 className="text-red-900 font-bold mb-2 text-base sm:text-lg">Error al cargar</h3>
+        <p className="text-red-700 mb-4 text-sm sm:text-base">{error}</p>
+        <button onClick={loadPublicaciones} className="bg-red-600 hover:bg-red-700 text-white px-5 sm:px-6 py-2 sm:py-2.5 rounded-xl font-medium transition-colors text-sm sm:text-base">
           Reintentar
         </button>
       </div>
@@ -293,40 +293,40 @@ export default function PublicacionesTab({ profile }: { profile: Profile }) {
   return (
     <div>
       {/* Header elegante */}
-      <div className="mb-8">
-        <div className="mb-6">
-          <h2 className="text-3xl font-bold text-slate-900 mb-2 tracking-tight">
+      <div className="mb-6 sm:mb-8">
+        <div className="mb-4 sm:mb-6">
+          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-1 sm:mb-2 tracking-tight">
             {profile.rol === "jugador" ? "Clubes Buscando Jugadores" : "Jugadores Buscando Equipo"}
           </h2>
-          <p className="text-slate-600">Encuentra tu próxima oportunidad</p>
+          <p className="text-sm sm:text-base text-slate-600">Encuentra tu próxima oportunidad</p>
         </div>
         
         {/* Búsqueda y filtros */}
-        <div className="space-y-4">
-          <div className="flex gap-3">
+        <div className="space-y-3 sm:space-y-4">
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
             {/* Barra de búsqueda */}
             <div className="relative flex-1">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
+              <Search className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
               <input
                 type="text"
-                placeholder="Buscar por título, descripción o nombre..."
+                placeholder="Buscar..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-12 pr-4 py-3.5 bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all shadow-sm text-slate-900 placeholder:text-slate-400"
+                className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-2.5 sm:py-3.5 bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all shadow-sm text-sm sm:text-base text-slate-900 placeholder:text-slate-400"
               />
             </div>
 
             {/* Botón de filtros */}
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className={`px-5 py-3.5 rounded-xl font-semibold transition-all shadow-sm flex items-center gap-2 ${
+              className={`px-4 sm:px-5 py-2.5 sm:py-3.5 rounded-xl font-semibold transition-all shadow-sm flex items-center justify-center gap-2 text-sm sm:text-base ${
                 showFilters || hasActiveFilters()
                   ? "bg-emerald-600 text-white"
                   : "bg-white text-slate-700 border border-slate-300 hover:bg-slate-50"
               }`}
             >
-              <SlidersHorizontal size={20} />
-              <span className="hidden sm:inline">Filtros</span>
+              <SlidersHorizontal size={18} className="sm:w-5 sm:h-5" />
+              <span>Filtros</span>
               {hasActiveFilters() && (
                 <span className="bg-white text-emerald-600 rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">
                   {[filterPosicion, filterEdadMin, filterEdadMax, filterUbicacion, filterDisponibilidad].filter(Boolean).length}
@@ -344,10 +344,10 @@ export default function PublicacionesTab({ profile }: { profile: Profile }) {
                 exit={{ opacity: 0, height: 0 }}
                 className="overflow-hidden"
               >
-                <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
-                  <div className="flex justify-between items-center mb-4">
-                    <h3 className="font-bold text-slate-900 flex items-center gap-2">
-                      <Filter size={18} />
+                <div className="bg-white border border-slate-200 rounded-xl p-4 sm:p-6 shadow-sm">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-0 mb-4">
+                    <h3 className="font-bold text-slate-900 flex items-center gap-2 text-sm sm:text-base">
+                      <Filter size={16} className="sm:w-[18px] sm:h-[18px]" />
                       Filtros de búsqueda
                     </h3>
                     {hasActiveFilters() && (
@@ -361,14 +361,14 @@ export default function PublicacionesTab({ profile }: { profile: Profile }) {
                     )}
                   </div>
 
-                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                     {/* Filtro de ubicación - DISPONIBLE PARA AMBOS ROLES */}
                     <div>
-                      <label className="block text-sm font-semibold text-slate-700 mb-2">Ubicación</label>
+                      <label className="block text-xs sm:text-sm font-semibold text-slate-700 mb-2">Ubicación</label>
                       <select
                         value={filterUbicacion}
                         onChange={(e) => setFilterUbicacion(e.target.value)}
-                        className="w-full px-4 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                        className="w-full px-3 sm:px-4 py-2 sm:py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-sm sm:text-base"
                       >
                         <option value="">Todas las ubicaciones</option>
                         {ubicaciones.map(ubi => (
@@ -381,11 +381,11 @@ export default function PublicacionesTab({ profile }: { profile: Profile }) {
                     {profile.rol === "club" && (
                       <>
                         <div>
-                          <label className="block text-sm font-semibold text-slate-700 mb-2">Posición del jugador</label>
+                          <label className="block text-xs sm:text-sm font-semibold text-slate-700 mb-2">Posición del jugador</label>
                           <select
                             value={filterPosicion}
                             onChange={(e) => setFilterPosicion(e.target.value)}
-                            className="w-full px-4 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                            className="w-full px-3 sm:px-4 py-2 sm:py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-sm sm:text-base"
                           >
                             <option value="">Todas las posiciones</option>
                             {posiciones.map(pos => (
@@ -395,33 +395,33 @@ export default function PublicacionesTab({ profile }: { profile: Profile }) {
                         </div>
 
                         <div>
-                          <label className="block text-sm font-semibold text-slate-700 mb-2">Edad mínima</label>
+                          <label className="block text-xs sm:text-sm font-semibold text-slate-700 mb-2">Edad mínima</label>
                           <input
                             type="number"
                             placeholder="Ej: 18"
                             value={filterEdadMin}
                             onChange={(e) => setFilterEdadMin(e.target.value)}
-                            className="w-full px-4 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                            className="w-full px-3 sm:px-4 py-2 sm:py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-sm sm:text-base"
                           />
                         </div>
 
                         <div>
-                          <label className="block text-sm font-semibold text-slate-700 mb-2">Edad máxima</label>
+                          <label className="block text-xs sm:text-sm font-semibold text-slate-700 mb-2">Edad máxima</label>
                           <input
                             type="number"
                             placeholder="Ej: 30"
                             value={filterEdadMax}
                             onChange={(e) => setFilterEdadMax(e.target.value)}
-                            className="w-full px-4 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                            className="w-full px-3 sm:px-4 py-2 sm:py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-sm sm:text-base"
                           />
                         </div>
 
                         <div>
-                          <label className="block text-sm font-semibold text-slate-700 mb-2">Disponibilidad</label>
+                          <label className="block text-xs sm:text-sm font-semibold text-slate-700 mb-2">Disponibilidad</label>
                           <select
                             value={filterDisponibilidad}
                             onChange={(e) => setFilterDisponibilidad(e.target.value)}
-                            className="w-full px-4 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                            className="w-full px-3 sm:px-4 py-2 sm:py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-sm sm:text-base"
                           >
                             <option value="">Cualquier día</option>
                             {diasSemana.map(dia => (
@@ -432,16 +432,13 @@ export default function PublicacionesTab({ profile }: { profile: Profile }) {
                       </>
                     )}
 
-                    {/* Filtros para JUGADORES buscando CLUBES */}
-                    {/* Nota: Categoría eliminada porque todos los clubes son amateur */}
-
                     {/* Ordenar por - DISPONIBLE PARA AMBOS */}
                     <div>
-                      <label className="block text-sm font-semibold text-slate-700 mb-2">Ordenar por</label>
+                      <label className="block text-xs sm:text-sm font-semibold text-slate-700 mb-2">Ordenar por</label>
                       <select
                         value={sortBy}
                         onChange={(e) => setSortBy(e.target.value as "reciente" | "antiguo")}
-                        className="w-full px-4 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                        className="w-full px-3 sm:px-4 py-2 sm:py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-sm sm:text-base"
                       >
                         <option value="reciente">Más recientes</option>
                         <option value="antiguo">Más antiguos</option>
@@ -454,7 +451,7 @@ export default function PublicacionesTab({ profile }: { profile: Profile }) {
           </AnimatePresence>
 
           {/* Contador de resultados */}
-          <div className="flex items-center justify-between text-sm text-slate-600">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs sm:text-sm text-slate-600">
             <p>
               Mostrando <span className="font-bold text-slate-900">{filteredPublicaciones.length}</span> de{" "}
               <span className="font-bold text-slate-900">{totalPublicaciones}</span> publicaciones
@@ -469,12 +466,12 @@ export default function PublicacionesTab({ profile }: { profile: Profile }) {
       </div>
 
       {filteredPublicaciones.length === 0 ? (
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-16 text-center">
-          <div className="text-6xl mb-4">📢</div>
-          <h3 className="text-2xl font-bold text-slate-900 mb-2">
+        <div className="bg-white rounded-xl sm:rounded-2xl shadow-sm border border-slate-200 p-8 sm:p-16 text-center">
+          <div className="text-4xl sm:text-6xl mb-3 sm:mb-4">📢</div>
+          <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-2">
             {searchTerm || hasActiveFilters() ? "Sin resultados" : "No hay publicaciones"}
           </h3>
-          <p className="text-slate-600 mb-4">
+          <p className="text-sm sm:text-base text-slate-600 mb-4">
             {searchTerm || hasActiveFilters()
               ? "Intenta ajustar los filtros o términos de búsqueda"
               : "Aún no hay publicaciones disponibles"}
@@ -482,27 +479,27 @@ export default function PublicacionesTab({ profile }: { profile: Profile }) {
           {hasActiveFilters() && (
             <button
               onClick={clearFilters}
-              className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-xl font-semibold transition-all"
+              className="bg-emerald-600 hover:bg-emerald-700 text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl font-semibold transition-all text-sm sm:text-base"
             >
               Limpiar filtros
             </button>
           )}
         </div>
       ) : (
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {filteredPublicaciones.map((pub) => (
             <motion.div
               key={pub.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-lg transition-all duration-300"
+              className="bg-white rounded-xl sm:rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-lg transition-all duration-300"
             >
               {/* Header card elegante */}
-              <div className="p-5 bg-slate-50 border-b border-slate-200">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center space-x-3 flex-1 min-w-0">
+              <div className="p-4 sm:p-5 bg-slate-50 border-b border-slate-200">
+                <div className="flex items-start justify-between mb-3 sm:mb-4 gap-2">
+                  <div className="flex items-center space-x-2 sm:space-x-3 flex-1 min-w-0">
                     {pub.profiles?.foto_url || pub.profiles?.logo_url ? (
-                      <div className="relative w-12 h-12 rounded-xl overflow-hidden ring-2 ring-white flex-shrink-0">
+                      <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl overflow-hidden ring-2 ring-white flex-shrink-0">
                         <Image
                           src={pub.profiles.foto_url || pub.profiles.logo_url || ""}
                           alt="Avatar"
@@ -511,13 +508,13 @@ export default function PublicacionesTab({ profile }: { profile: Profile }) {
                         />
                       </div>
                     ) : (
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center ring-2 ring-white flex-shrink-0">
-                        {pub.profiles?.rol === "jugador" ? <User size={22} className="text-slate-600" /> : <Users size={22} className="text-slate-600" />}
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center ring-2 ring-white flex-shrink-0">
+                        {pub.profiles?.rol === "jugador" ? <User size={20} className="text-slate-600 sm:w-[22px] sm:h-[22px]" /> : <Users size={20} className="text-slate-600 sm:w-[22px] sm:h-[22px]" />}
                       </div>
                     )}
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-1.5">
-                        <p className="font-semibold text-slate-900 truncate">
+                      <div className="flex items-center gap-1 sm:gap-1.5">
+                        <p className="font-semibold text-sm sm:text-base text-slate-900 truncate">
                           {pub.profiles?.nombre_completo || pub.profiles?.nombre_club || "Usuario"}
                         </p>
                         {pub.profiles?.rol === "club" && pub.profiles?.verified && (
@@ -525,7 +522,7 @@ export default function PublicacionesTab({ profile }: { profile: Profile }) {
                         )}
                       </div>
                       <p className="text-xs text-slate-500 flex items-center mt-0.5">
-                        <Calendar size={12} className="mr-1" />
+                        <Calendar size={11} className="mr-1 sm:w-3 sm:h-3" />
                         {new Date(pub.created_at).toLocaleDateString("es-ES", {
                           day: "numeric",
                           month: "short"
@@ -536,30 +533,30 @@ export default function PublicacionesTab({ profile }: { profile: Profile }) {
 
                   {/* Botones mejorados para tu publicación */}
                   {pub.user_id === profile.id && (
-                    <div className="flex gap-2 flex-shrink-0">
+                    <div className="flex gap-1.5 sm:gap-2 flex-shrink-0">
                       <button
                         onClick={() => handleToggleActiva(pub.id, pub.activa !== false)}
-                        className={`p-2 rounded-lg transition-all ${
+                        className={`p-1.5 sm:p-2 rounded-lg transition-all ${
                           pub.activa !== false 
                             ? "bg-amber-100 hover:bg-amber-200 text-amber-700" 
                             : "bg-emerald-100 hover:bg-emerald-200 text-emerald-700"
                         }`}
                         title={pub.activa !== false ? "Pausar publicación" : "Reactivar publicación"}
                       >
-                        {pub.activa !== false ? <Pause size={16} /> : <Play size={16} />}
+                        {pub.activa !== false ? <Pause size={14} className="sm:w-4 sm:h-4" /> : <Play size={14} className="sm:w-4 sm:h-4" />}
                       </button>
                       <button
                         onClick={() => handleDelete(pub.id)}
-                        className="p-2 rounded-lg bg-red-100 hover:bg-red-200 text-red-700 transition-all"
+                        className="p-1.5 sm:p-2 rounded-lg bg-red-100 hover:bg-red-200 text-red-700 transition-all"
                         title="Eliminar publicación"
                       >
-                        <Trash2 size={16} />
+                        <Trash2 size={14} className="sm:w-4 sm:h-4" />
                       </button>
                     </div>
                   )}
                 </div>
 
-                <span className={`inline-block px-3 py-1.5 rounded-lg text-xs font-semibold ${
+                <span className={`inline-block px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg text-xs font-semibold ${
                   pub.publication_type === "busco_equipo" 
                     ? "bg-emerald-100 text-emerald-700 border border-emerald-200" 
                     : "bg-blue-100 text-blue-700 border border-blue-200"
@@ -569,18 +566,18 @@ export default function PublicacionesTab({ profile }: { profile: Profile }) {
               </div>
 
               {/* Contenido */}
-              <div className="p-5">
-                <h3 className="font-bold text-lg text-slate-900 mb-3 line-clamp-2 leading-snug">
+              <div className="p-4 sm:p-5">
+                <h3 className="font-bold text-base sm:text-lg text-slate-900 mb-2 sm:mb-3 line-clamp-2 leading-snug">
                   {pub.title}
                 </h3>
 
-                <p className="text-slate-600 text-sm mb-5 line-clamp-3 leading-relaxed">
+                <p className="text-slate-600 text-sm mb-4 sm:mb-5 line-clamp-3 leading-relaxed">
                   {pub.content}
                 </p>
 
                 {/* Acciones mejoradas */}
                 {pub.user_id === profile.id ? (
-                  <div className={`px-4 py-3 rounded-xl text-center text-sm font-semibold border ${
+                  <div className={`px-3 sm:px-4 py-2 sm:py-3 rounded-xl text-center text-xs sm:text-sm font-semibold border ${
                     pub.activa !== false
                       ? "bg-emerald-50 text-emerald-700 border-emerald-200"
                       : "bg-amber-50 text-amber-700 border-amber-200"
@@ -588,24 +585,24 @@ export default function PublicacionesTab({ profile }: { profile: Profile }) {
                     {pub.activa !== false ? "✓ Publicación activa" : "⏸ Publicación pausada"}
                   </div>
                 ) : pub.activa === false ? (
-                  <div className="px-4 py-3 rounded-xl text-center text-sm font-semibold bg-slate-100 text-slate-500 border border-slate-200">
+                  <div className="px-3 sm:px-4 py-2 sm:py-3 rounded-xl text-center text-xs sm:text-sm font-semibold bg-slate-100 text-slate-500 border border-slate-200">
                     Publicación no disponible
                   </div>
                 ) : (
                   <div className="space-y-2">
                     <button 
                       onClick={() => handleViewProfile(pub.user_id)}
-                      className="w-full bg-slate-900 hover:bg-slate-800 text-white py-3 rounded-xl font-semibold transition-all shadow-sm flex items-center justify-center space-x-2"
+                      className="w-full bg-slate-900 hover:bg-slate-800 text-white py-2.5 sm:py-3 rounded-xl font-semibold transition-all shadow-sm flex items-center justify-center space-x-2 text-sm sm:text-base"
                     >
-                      <Eye size={18} />
-                      <span>Ver Perfil Completo</span>
+                      <Eye size={16} className="sm:w-[18px] sm:h-[18px]" />
+                      <span>Ver Perfil</span>
                     </button>
                     <div className="grid grid-cols-2 gap-2">
                       <button 
                         onClick={() => handleStartChat(pub.id, pub.user_id)}
-                        className="bg-emerald-600 hover:bg-emerald-700 text-white py-2.5 rounded-xl font-semibold transition-all flex items-center justify-center space-x-2"
+                        className="bg-emerald-600 hover:bg-emerald-700 text-white py-2 sm:py-2.5 rounded-xl font-semibold transition-all flex items-center justify-center space-x-1.5 sm:space-x-2 text-sm"
                       >
-                        <MessageSquare size={16} />
+                        <MessageSquare size={14} className="sm:w-4 sm:h-4" />
                         <span>Chat</span>
                       </button>
                       <button 
@@ -613,9 +610,9 @@ export default function PublicacionesTab({ profile }: { profile: Profile }) {
                           pub.profiles?.telefono || '',
                           pub.profiles?.nombre_completo || pub.profiles?.nombre_club || 'Usuario'
                         )}
-                        className="bg-green-600 hover:bg-green-700 text-white py-2.5 rounded-xl font-semibold transition-all flex items-center justify-center space-x-2"
+                        className="bg-green-600 hover:bg-green-700 text-white py-2 sm:py-2.5 rounded-xl font-semibold transition-all flex items-center justify-center space-x-1.5 sm:space-x-2 text-sm"
                       >
-                        <Phone size={16} />
+                        <Phone size={14} className="sm:w-4 sm:h-4" />
                         <span>WhatsApp</span>
                       </button>
                     </div>
@@ -630,26 +627,26 @@ export default function PublicacionesTab({ profile }: { profile: Profile }) {
       {/* Modal de Perfil elegante */}
       {showProfileModal && selectedProfile && (
         <div 
-          className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4 backdrop-blur-sm"
+          className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-3 sm:p-4 backdrop-blur-sm"
           onClick={() => setShowProfileModal(false)}
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             onClick={(e) => e.stopPropagation()}
-            className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+            className="bg-white rounded-xl sm:rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
           >
             {/* Header modal */}
-            <div className="bg-gradient-to-br from-emerald-600 to-emerald-700 p-8 text-white relative">
+            <div className="bg-gradient-to-br from-emerald-600 to-emerald-700 p-6 sm:p-8 text-white relative">
               <button
                 onClick={() => setShowProfileModal(false)}
-                className="absolute top-4 right-4 text-white/80 hover:text-white hover:bg-white/10 rounded-xl p-2 transition-all"
+                className="absolute top-3 right-3 sm:top-4 sm:right-4 text-white/80 hover:text-white hover:bg-white/10 rounded-xl p-2 transition-all"
               >
                 ✕
               </button>
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-3 sm:space-x-4">
                 {selectedProfile.foto_url || selectedProfile.logo_url ? (
-                  <div className="relative w-20 h-20 rounded-2xl overflow-hidden ring-4 ring-white/30">
+                  <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-xl sm:rounded-2xl overflow-hidden ring-4 ring-white/30">
                     <Image
                       src={selectedProfile.foto_url || selectedProfile.logo_url}
                       alt="Avatar"
@@ -658,13 +655,13 @@ export default function PublicacionesTab({ profile }: { profile: Profile }) {
                     />
                   </div>
                 ) : (
-                  <div className="w-20 h-20 rounded-2xl bg-white/20 ring-4 ring-white/30 flex items-center justify-center">
-                    {selectedProfile.rol === "jugador" ? <User size={36} className="text-white" /> : <Users size={36} className="text-white" />}
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl sm:rounded-2xl bg-white/20 ring-4 ring-white/30 flex items-center justify-center">
+                    {selectedProfile.rol === "jugador" ? <User size={32} className="text-white sm:w-9 sm:h-9" /> : <Users size={32} className="text-white sm:w-9 sm:h-9" />}
                   </div>
                 )}
-                <div>
+                <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
-                    <h2 className="text-2xl font-bold">
+                    <h2 className="text-xl sm:text-2xl font-bold truncate">
                       {selectedProfile.nombre_completo || selectedProfile.nombre_club}
                     </h2>
                     {selectedProfile.rol === "club" && selectedProfile.verified && (
@@ -674,7 +671,7 @@ export default function PublicacionesTab({ profile }: { profile: Profile }) {
                       />
                     )}
                   </div>
-                  <p className="text-emerald-100">
+                  <p className="text-sm sm:text-base text-emerald-100 truncate">
                     {selectedProfile.rol === "jugador" ? selectedProfile.posicion : selectedProfile.categoria}
                   </p>
                 </div>
@@ -682,41 +679,41 @@ export default function PublicacionesTab({ profile }: { profile: Profile }) {
             </div>
 
             {/* Contenido */}
-            <div className="p-8">
+            <div className="p-6 sm:p-8">
               {selectedProfile.rol === "jugador" ? (
-                <div className="space-y-5">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-slate-50 rounded-xl p-4 border border-slate-200">
-                      <p className="text-sm text-slate-600 mb-1 font-medium">Edad</p>
-                      <p className="text-2xl font-bold text-slate-900">{selectedProfile.edad}</p>
+                <div className="space-y-4 sm:space-y-5">
+                  <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                    <div className="bg-slate-50 rounded-xl p-3 sm:p-4 border border-slate-200">
+                      <p className="text-xs sm:text-sm text-slate-600 mb-1 font-medium">Edad</p>
+                      <p className="text-xl sm:text-2xl font-bold text-slate-900">{selectedProfile.edad}</p>
                     </div>
-                    <div className="bg-slate-50 rounded-xl p-4 border border-slate-200">
-                      <p className="text-sm text-slate-600 mb-1 font-medium">Posición</p>
-                      <p className="text-2xl font-bold text-slate-900">{selectedProfile.posicion}</p>
+                    <div className="bg-slate-50 rounded-xl p-3 sm:p-4 border border-slate-200">
+                      <p className="text-xs sm:text-sm text-slate-600 mb-1 font-medium">Posición</p>
+                      <p className="text-xl sm:text-2xl font-bold text-slate-900">{selectedProfile.posicion}</p>
                     </div>
-                    <div className="bg-slate-50 rounded-xl p-4 border border-slate-200">
-                      <p className="text-sm text-slate-600 mb-1 font-medium">Pierna</p>
-                      <p className="text-2xl font-bold text-slate-900 capitalize">{selectedProfile.pierna}</p>
+                    <div className="bg-slate-50 rounded-xl p-3 sm:p-4 border border-slate-200">
+                      <p className="text-xs sm:text-sm text-slate-600 mb-1 font-medium">Pierna</p>
+                      <p className="text-xl sm:text-2xl font-bold text-slate-900 capitalize">{selectedProfile.pierna}</p>
                     </div>
-                    <div className="bg-slate-50 rounded-xl p-4 border border-slate-200">
-                      <p className="text-sm text-slate-600 mb-1 font-medium">Altura/Peso</p>
-                      <p className="text-2xl font-bold text-slate-900">{selectedProfile.altura}/{selectedProfile.peso}</p>
+                    <div className="bg-slate-50 rounded-xl p-3 sm:p-4 border border-slate-200">
+                      <p className="text-xs sm:text-sm text-slate-600 mb-1 font-medium">Altura/Peso</p>
+                      <p className="text-xl sm:text-2xl font-bold text-slate-900">{selectedProfile.altura}/{selectedProfile.peso}</p>
                     </div>
                   </div>
 
                   {selectedProfile.experiencia && (
-                    <div className="bg-slate-50 rounded-xl p-4 border border-slate-200">
-                      <p className="text-sm font-semibold text-slate-700 mb-2">Experiencia</p>
-                      <p className="text-slate-700 leading-relaxed">{selectedProfile.experiencia}</p>
+                    <div className="bg-slate-50 rounded-xl p-3 sm:p-4 border border-slate-200">
+                      <p className="text-xs sm:text-sm font-semibold text-slate-700 mb-2">Experiencia</p>
+                      <p className="text-sm sm:text-base text-slate-700 leading-relaxed">{selectedProfile.experiencia}</p>
                     </div>
                   )}
 
                   {selectedProfile.disponibilidad?.length > 0 && (
                     <div>
-                      <p className="text-sm font-semibold text-slate-700 mb-3">Disponibilidad</p>
+                      <p className="text-xs sm:text-sm font-semibold text-slate-700 mb-2 sm:mb-3">Disponibilidad</p>
                       <div className="flex flex-wrap gap-2">
                         {selectedProfile.disponibilidad.map((dia: string) => (
-                          <span key={dia} className="px-3 py-1.5 bg-emerald-50 text-emerald-700 rounded-lg text-sm font-semibold border border-emerald-200">
+                          <span key={dia} className="px-2.5 sm:px-3 py-1 sm:py-1.5 bg-emerald-50 text-emerald-700 rounded-lg text-xs sm:text-sm font-semibold border border-emerald-200">
                             {dia}
                           </span>
                         ))}
@@ -725,22 +722,22 @@ export default function PublicacionesTab({ profile }: { profile: Profile }) {
                   )}
                 </div>
               ) : (
-                <div className="space-y-5">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-slate-50 rounded-xl p-4 border border-slate-200">
-                      <p className="text-sm text-slate-600 mb-1 font-medium">Ubicación</p>
-                      <p className="font-semibold text-slate-900">{selectedProfile.ubicacion}</p>
+                <div className="space-y-4 sm:space-y-5">
+                  <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                    <div className="bg-slate-50 rounded-xl p-3 sm:p-4 border border-slate-200">
+                      <p className="text-xs sm:text-sm text-slate-600 mb-1 font-medium">Ubicación</p>
+                      <p className="text-sm sm:text-base font-semibold text-slate-900">{selectedProfile.ubicacion}</p>
                     </div>
-                    <div className="bg-slate-50 rounded-xl p-4 border border-slate-200">
-                      <p className="text-sm text-slate-600 mb-1 font-medium">Categoría</p>
-                      <p className="font-semibold text-slate-900">{selectedProfile.categoria}</p>
+                    <div className="bg-slate-50 rounded-xl p-3 sm:p-4 border border-slate-200">
+                      <p className="text-xs sm:text-sm text-slate-600 mb-1 font-medium">Categoría</p>
+                      <p className="text-sm sm:text-base font-semibold text-slate-900">{selectedProfile.categoria}</p>
                     </div>
                   </div>
 
                   {selectedProfile.descripcion && (
-                    <div className="bg-slate-50 rounded-xl p-4 border border-slate-200">
-                      <p className="text-sm font-semibold text-slate-700 mb-2">Sobre el Club</p>
-                      <p className="text-slate-700 leading-relaxed">{selectedProfile.descripcion}</p>
+                    <div className="bg-slate-50 rounded-xl p-3 sm:p-4 border border-slate-200">
+                      <p className="text-xs sm:text-sm font-semibold text-slate-700 mb-2">Sobre el Club</p>
+                      <p className="text-sm sm:text-base text-slate-700 leading-relaxed">{selectedProfile.descripcion}</p>
                     </div>
                   )}
                 </div>
@@ -752,9 +749,9 @@ export default function PublicacionesTab({ profile }: { profile: Profile }) {
                     handleWhatsApp(selectedProfile.telefono, selectedProfile.nombre_completo || selectedProfile.nombre_club)
                     setShowProfileModal(false)
                   }}
-                  className="w-full mt-6 bg-green-600 hover:bg-green-700 text-white py-3.5 rounded-xl font-bold transition-all shadow-sm flex items-center justify-center space-x-2"
+                  className="w-full mt-5 sm:mt-6 bg-green-600 hover:bg-green-700 text-white py-3 sm:py-3.5 rounded-xl font-bold transition-all shadow-sm flex items-center justify-center space-x-2 text-sm sm:text-base"
                 >
-                  <Phone size={20} />
+                  <Phone size={18} className="sm:w-5 sm:h-5" />
                   <span>Contactar por WhatsApp</span>
                 </button>
               )}

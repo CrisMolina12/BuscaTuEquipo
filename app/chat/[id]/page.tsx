@@ -691,9 +691,9 @@ export default function ChatPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100">
-        <div className="text-center">
-          <div className="w-12 h-12 border-3 border-slate-200 border-t-emerald-600 rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-slate-600 font-medium">Cargando chat...</p>
+        <div className="text-center px-4">
+          <div className="w-10 h-10 sm:w-12 sm:h-12 border-3 border-slate-200 border-t-emerald-600 rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-slate-600 font-medium text-sm sm:text-base">Cargando chat...</p>
         </div>
       </div>
     )
@@ -701,23 +701,24 @@ export default function ChatPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex flex-col">
-      {/* Header con botón de llamada */}
-      <div className="bg-white border-b border-slate-200 shadow-sm">
-        <div className="max-w-4xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4 flex-1 min-w-0">
+      {/* Header fijo - no necesita scroll */}
+      <div className="bg-white border-b border-slate-200 shadow-sm sticky top-0 z-50">
+        <div className="max-w-4xl mx-auto px-3 sm:px-4 py-3 sm:py-4">
+          <div className="flex items-center justify-between gap-2 sm:gap-4">
+            <div className="flex items-center gap-2 sm:gap-4 flex-1 min-w-0">
               <button
                 onClick={() => router.push("/home")}
-                className="p-2 hover:bg-slate-100 rounded-xl transition-colors"
+                className="p-2 hover:bg-slate-100 rounded-xl transition-colors flex-shrink-0"
+                aria-label="Volver"
               >
-                <ArrowLeft size={20} className="text-slate-700" />
+                <ArrowLeft size={20} className="text-slate-700 sm:w-5 sm:h-5" />
               </button>
               
               {otroUsuario && (
                 <>
-                  <div className="relative">
+                  <div className="relative flex-shrink-0">
                     {otroUsuario.foto_url || otroUsuario.logo_url ? (
-                      <div className="relative w-12 h-12 rounded-xl overflow-hidden ring-2 ring-slate-100">
+                      <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl overflow-hidden ring-2 ring-slate-100">
                         <Image
                           src={otroUsuario.foto_url || otroUsuario.logo_url}
                           alt="Avatar"
@@ -726,31 +727,31 @@ export default function ChatPage() {
                         />
                       </div>
                     ) : (
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center ring-2 ring-slate-100">
-                        <span className="text-xl font-semibold text-slate-600">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center ring-2 ring-slate-100">
+                        <span className="text-lg sm:text-xl font-semibold text-slate-600">
                           {(otroUsuario.nombre_completo || otroUsuario.nombre_club || "U").charAt(0).toUpperCase()}
                         </span>
                       </div>
                     )}
                     {isOtherUserOnline && (
-                      <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 rounded-full border-2 border-white"></div>
+                      <div className="absolute bottom-0 right-0 w-3 h-3 sm:w-3.5 sm:h-3.5 bg-emerald-500 rounded-full border-2 border-white"></div>
                     )}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h2 className="font-bold text-slate-900 truncate">
+                    <h2 className="font-bold text-sm sm:text-base text-slate-900 truncate">
                       {otroUsuario.nombre_completo || otroUsuario.nombre_club}
                     </h2>
-                    <div className="flex items-center gap-1.5">
+                    <div className="flex items-center gap-1 sm:gap-1.5">
                       {isOtherUserTyping ? (
                         <span className="flex gap-0.5">
-                          <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                          <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                          <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                          <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-emerald-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                          <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-emerald-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                          <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-emerald-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
                         </span>
                       ) : isOtherUserOnline ? (
-                        <Circle size={8} className="text-emerald-500 fill-emerald-500" />
+                        <Circle size={7} className="text-emerald-500 fill-emerald-500 sm:w-2 sm:h-2" />
                       ) : null}
-                      <p className={`text-xs truncate ${
+                      <p className={`text-xs sm:text-sm truncate ${
                         isOtherUserTyping 
                           ? 'text-emerald-600 font-medium' 
                           : isOtherUserOnline 
@@ -765,26 +766,26 @@ export default function ChatPage() {
               )}
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
               {otroUsuario?.telefono && (
                 <button 
                   onClick={handlePhoneCall}
-                  className="p-2.5 hover:bg-emerald-50 rounded-xl transition-colors group"
+                  className="p-2 sm:p-2.5 hover:bg-emerald-50 rounded-lg sm:rounded-xl transition-colors group"
                   title="Llamar"
                 >
-                  <Phone size={20} className="text-emerald-600 group-hover:text-emerald-700" />
+                  <Phone size={18} className="text-emerald-600 group-hover:text-emerald-700 sm:w-5 sm:h-5" />
                 </button>
               )}
-              <button className="p-2 hover:bg-slate-100 rounded-xl transition-colors">
-                <MoreVertical size={20} className="text-slate-600" />
+              <button className="p-2 hover:bg-slate-100 rounded-lg sm:rounded-xl transition-colors">
+                <MoreVertical size={18} className="text-slate-600 sm:w-5 sm:h-5" />
               </button>
             </div>
           </div>
 
           {conversacion?.publicaciones && (
-            <div className="mt-3 px-4 py-2 bg-slate-50 rounded-xl border border-slate-200">
+            <div className="mt-2 sm:mt-3 px-3 sm:px-4 py-1.5 sm:py-2 bg-slate-50 rounded-lg sm:rounded-xl border border-slate-200">
               <p className="text-xs text-slate-600 mb-0.5">Sobre la publicación:</p>
-              <p className="text-sm font-medium text-slate-900 truncate">
+              <p className="text-xs sm:text-sm font-medium text-slate-900 truncate">
                 {conversacion.publicaciones.title}
               </p>
             </div>
@@ -794,12 +795,12 @@ export default function ChatPage() {
 
       {/* Mensajes */}
       <div className="flex-1 overflow-y-auto">
-        <div className="max-w-4xl mx-auto px-4 py-6 flex flex-col gap-4">
+        <div className="max-w-4xl mx-auto px-3 sm:px-4 py-4 sm:py-6 flex flex-col gap-3 sm:gap-4">
           {mensajes.length === 0 ? (
-            <div className="text-center py-12">
-              <div className="text-5xl mb-3">💬</div>
-              <p className="text-slate-600 font-medium mb-1">Inicia la conversación</p>
-              <p className="text-sm text-slate-500">Escribe un mensaje para comenzar</p>
+            <div className="text-center py-8 sm:py-12">
+              <div className="text-4xl sm:text-5xl mb-2 sm:mb-3">💬</div>
+              <p className="text-slate-600 font-medium mb-1 text-sm sm:text-base">Inicia la conversación</p>
+              <p className="text-xs sm:text-sm text-slate-500">Escribe un mensaje para comenzar</p>
             </div>
           ) : (
             mensajes.map((msg, index) => {
@@ -812,8 +813,8 @@ export default function ChatPage() {
               return (
                 <div key={msg.id}>
                   {showDate && (
-                    <div className="flex justify-center my-6">
-                      <span className="px-3 py-1 bg-slate-200 text-slate-600 rounded-full text-xs font-medium">
+                    <div className="flex justify-center my-4 sm:my-6">
+                      <span className="px-2.5 sm:px-3 py-1 bg-slate-200 text-slate-600 rounded-full text-xs font-medium">
                         {new Date(msg.created_at).toLocaleDateString("es-ES", {
                           weekday: "long",
                           day: "numeric",
@@ -824,9 +825,9 @@ export default function ChatPage() {
                   )}
 
                   <div className={`flex ${isMine ? "justify-end" : "justify-start"}`}>
-                    <div className={`max-w-[70%] ${isMine ? "" : "flex items-start gap-2"}`}>
+                    <div className={`max-w-[85%] sm:max-w-[70%] ${isMine ? "" : "flex items-start gap-1.5 sm:gap-2"}`}>
                       {!isMine && otroUsuario?.foto_url && (
-                        <div className="relative w-8 h-8 rounded-lg overflow-hidden flex-shrink-0">
+                        <div className="relative w-7 h-7 sm:w-8 sm:h-8 rounded-lg overflow-hidden flex-shrink-0">
                           <Image
                             src={otroUsuario.foto_url || otroUsuario.logo_url}
                             alt="Avatar"
@@ -837,30 +838,30 @@ export default function ChatPage() {
                       )}
                       <div>
                         <div
-                          className={`rounded-2xl px-4 py-2.5 ${
+                          className={`rounded-2xl px-3 py-2 sm:px-4 sm:py-2.5 ${
                             isMine
                               ? `bg-emerald-600 text-white rounded-br-md ${isOptimistic ? 'opacity-70' : ''}`
                               : "bg-white text-slate-900 border border-slate-200 rounded-bl-md shadow-sm"
                           }`}
                         >
                           {isAudio && msg.audio_url ? (
-                            <div className="flex flex-col gap-2 min-w-[200px]">
-                              <div className="flex items-center gap-3">
+                            <div className="flex flex-col gap-1.5 sm:gap-2 min-w-[180px] sm:min-w-[200px]">
+                              <div className="flex items-center gap-2 sm:gap-3">
                                 <button
                                   onClick={() => playAudio(msg.audio_url!, msg.id)}
-                                  className={`p-2.5 rounded-full ${isMine ? 'bg-white/20 hover:bg-white/30' : 'bg-slate-100 hover:bg-slate-200'} transition-colors flex-shrink-0`}
+                                  className={`p-2 sm:p-2.5 rounded-full ${isMine ? 'bg-white/20 hover:bg-white/30' : 'bg-slate-100 hover:bg-slate-200'} transition-colors flex-shrink-0`}
                                 >
                                   {playingAudioId === msg.id ? (
-                                    <Pause size={18} className={isMine ? 'text-white' : 'text-slate-700'} />
+                                    <Pause size={16} className={`${isMine ? 'text-white' : 'text-slate-700'} sm:w-[18px] sm:h-[18px]`} />
                                   ) : (
-                                    <Play size={18} className={isMine ? 'text-white' : 'text-slate-700'} />
+                                    <Play size={16} className={`${isMine ? 'text-white' : 'text-slate-700'} sm:w-[18px] sm:h-[18px]`} />
                                   )}
                                 </button>
                                 
                                 <div className="flex-1">
                                   {/* Barra de progreso clickeable */}
                                   <div 
-                                    className={`h-2 rounded-full cursor-pointer ${isMine ? 'bg-white/20' : 'bg-slate-200'}`}
+                                    className={`h-1.5 sm:h-2 rounded-full cursor-pointer ${isMine ? 'bg-white/20' : 'bg-slate-200'}`}
                                     onClick={(e) => {
                                       const rect = e.currentTarget.getBoundingClientRect()
                                       const x = e.clientX - rect.left
@@ -874,7 +875,7 @@ export default function ChatPage() {
                                     ></div>
                                   </div>
                                   
-                                  <div className="flex justify-between items-center mt-1">
+                                  <div className="flex justify-between items-center mt-0.5 sm:mt-1">
                                     <p className={`text-xs ${isMine ? 'text-white/80' : 'text-slate-600'}`}>
                                       {formatTime(msg.duracion_audio || 0)}
                                     </p>
@@ -882,7 +883,7 @@ export default function ChatPage() {
                                     {/* Botón de velocidad */}
                                     <button
                                       onClick={() => changePlaybackSpeed(msg.id)}
-                                      className={`text-xs font-semibold px-2 py-0.5 rounded ${
+                                      className={`text-xs font-semibold px-1.5 sm:px-2 py-0.5 rounded ${
                                         isMine 
                                           ? 'bg-white/20 hover:bg-white/30 text-white' 
                                           : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
@@ -895,10 +896,10 @@ export default function ChatPage() {
                               </div>
                             </div>
                           ) : (
-                            <p className="break-words leading-relaxed">{msg.contenido}</p>
+                            <p className="break-words leading-relaxed text-sm sm:text-base">{msg.contenido}</p>
                           )}
                         </div>
-                        <div className={`flex items-center gap-2 mt-1 px-1 ${isMine ? "justify-end" : "justify-start"}`}>
+                        <div className={`flex items-center gap-1.5 sm:gap-2 mt-0.5 sm:mt-1 px-1 ${isMine ? "justify-end" : "justify-start"}`}>
                           <p className="text-xs text-slate-500">
                             {formatMessageTime(msg.created_at)}
                           </p>
@@ -921,30 +922,30 @@ export default function ChatPage() {
 
       {/* Preview de audio grabado */}
       {audioBlob && (
-        <div className="bg-amber-50 border-t border-amber-200 px-4 py-3">
-          <div className="max-w-4xl mx-auto flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-amber-100 rounded-full">
-                <Mic size={20} className="text-amber-700" />
+        <div className="bg-amber-50 border-t border-amber-200 px-3 sm:px-4 py-2.5 sm:py-3">
+          <div className="max-w-4xl mx-auto flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
+              <div className="p-1.5 sm:p-2 bg-amber-100 rounded-full flex-shrink-0">
+                <Mic size={18} className="text-amber-700 sm:w-5 sm:h-5" />
               </div>
-              <div>
-                <p className="text-sm font-semibold text-amber-900">Nota de voz grabada</p>
+              <div className="min-w-0">
+                <p className="text-xs sm:text-sm font-semibold text-amber-900 truncate">Nota de voz grabada</p>
                 <p className="text-xs text-amber-700">{formatTime(recordingTime)}</p>
               </div>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
               <button
                 onClick={() => setAudioBlob(null)}
-                className="px-4 py-2 bg-white border border-amber-300 text-amber-700 rounded-xl hover:bg-amber-50 transition-colors font-medium"
+                className="px-2.5 sm:px-4 py-1.5 sm:py-2 bg-white border border-amber-300 text-amber-700 rounded-lg sm:rounded-xl hover:bg-amber-50 transition-colors font-medium text-xs sm:text-sm"
               >
                 Cancelar
               </button>
               <button
                 onClick={sendAudioMessage}
                 disabled={sending}
-                className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl transition-colors font-medium disabled:opacity-50"
+                className="px-2.5 sm:px-4 py-1.5 sm:py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg sm:rounded-xl transition-colors font-medium disabled:opacity-50 text-xs sm:text-sm"
               >
-                {sending ? "Enviando..." : "Enviar"}
+                {sending ? "..." : "Enviar"}
               </button>
             </div>
           </div>
@@ -953,27 +954,27 @@ export default function ChatPage() {
 
       {/* Indicador de grabación */}
       {isRecording && (
-        <div className="bg-red-50 border-t border-red-200 px-4 py-3">
-          <div className="max-w-4xl mx-auto flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-red-500 rounded-full animate-pulse">
-                <Mic size={20} className="text-white" />
+        <div className="bg-red-50 border-t border-red-200 px-3 sm:px-4 py-2.5 sm:py-3">
+          <div className="max-w-4xl mx-auto flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
+              <div className="p-1.5 sm:p-2 bg-red-500 rounded-full animate-pulse flex-shrink-0">
+                <Mic size={18} className="text-white sm:w-5 sm:h-5" />
               </div>
-              <div>
-                <p className="text-sm font-semibold text-red-900">Grabando nota de voz...</p>
+              <div className="min-w-0">
+                <p className="text-xs sm:text-sm font-semibold text-red-900 truncate">Grabando nota de voz...</p>
                 <p className="text-xs text-red-700">{formatTime(recordingTime)}</p>
               </div>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
               <button
                 onClick={cancelRecording}
-                className="px-4 py-2 bg-white border border-red-300 text-red-700 rounded-xl hover:bg-red-50 transition-colors font-medium"
+                className="px-2.5 sm:px-4 py-1.5 sm:py-2 bg-white border border-red-300 text-red-700 rounded-lg sm:rounded-xl hover:bg-red-50 transition-colors font-medium text-xs sm:text-sm"
               >
                 Cancelar
               </button>
               <button
                 onClick={stopRecording}
-                className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl transition-colors font-medium"
+                className="px-2.5 sm:px-4 py-1.5 sm:py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg sm:rounded-xl transition-colors font-medium text-xs sm:text-sm"
               >
                 Detener
               </button>
@@ -984,38 +985,38 @@ export default function ChatPage() {
 
       {/* Input con emojis y audio */}
       <div className="bg-white border-t border-slate-200 shadow-lg">
-        <form onSubmit={handleSendMessage} className="max-w-4xl mx-auto px-4 py-4">
-          <div className="flex items-end gap-2">
+        <form onSubmit={handleSendMessage} className="max-w-4xl mx-auto px-3 sm:px-4 py-3 sm:py-4">
+          <div className="flex items-end gap-1.5 sm:gap-2">
             {/* Botón de emoji */}
             <div className="relative">
               <button
                 type="button"
                 onClick={() => setShowEmojiPicker(!showEmojiPicker)}
-                className="p-2.5 hover:bg-slate-100 rounded-xl transition-colors"
+                className="p-2 sm:p-2.5 hover:bg-slate-100 rounded-lg sm:rounded-xl transition-colors flex-shrink-0"
               >
-                <Smile size={22} className="text-slate-600" />
+                <Smile size={20} className="text-slate-600 sm:w-[22px] sm:h-[22px]" />
               </button>
 
               {/* Picker de emojis */}
               {showEmojiPicker && (
-                <div className="absolute bottom-full mb-2 left-0 bg-white rounded-2xl shadow-xl border border-slate-200 p-3 w-64">
-                  <div className="flex justify-between items-center mb-2 pb-2 border-b border-slate-200">
-                    <p className="text-sm font-semibold text-slate-700">Emojis</p>
+                <div className="absolute bottom-full mb-2 left-0 bg-white rounded-xl sm:rounded-2xl shadow-xl border border-slate-200 p-2 sm:p-3 w-56 sm:w-64 z-10">
+                  <div className="flex justify-between items-center mb-1.5 sm:mb-2 pb-1.5 sm:pb-2 border-b border-slate-200">
+                    <p className="text-xs sm:text-sm font-semibold text-slate-700">Emojis</p>
                     <button
                       type="button"
                       onClick={() => setShowEmojiPicker(false)}
                       className="p-1 hover:bg-slate-100 rounded-lg"
                     >
-                      <X size={16} className="text-slate-600" />
+                      <X size={14} className="text-slate-600 sm:w-4 sm:h-4" />
                     </button>
                   </div>
-                  <div className="grid grid-cols-8 gap-1 max-h-48 overflow-y-auto">
+                  <div className="grid grid-cols-8 gap-0.5 sm:gap-1 max-h-40 sm:max-h-48 overflow-y-auto">
                     {EMOJIS.map((emoji, index) => (
                       <button
                         key={index}
                         type="button"
                         onClick={() => handleEmojiClick(emoji)}
-                        className="text-2xl hover:bg-slate-100 rounded-lg p-1 transition-colors"
+                        className="text-xl sm:text-2xl hover:bg-slate-100 rounded-lg p-0.5 sm:p-1 transition-colors"
                       >
                         {emoji}
                       </button>
@@ -1038,10 +1039,10 @@ export default function ChatPage() {
                 }}
                 placeholder="Escribe un mensaje..."
                 rows={1}
-                className="w-full px-4 py-3 border border-slate-300 rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all resize-none max-h-32 text-slate-900 placeholder:text-slate-400"
+                className="w-full px-3 py-2 sm:px-4 sm:py-3 border border-slate-300 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all resize-none max-h-24 sm:max-h-32 text-sm sm:text-base text-slate-900 placeholder:text-slate-400"
                 style={{
-                  minHeight: '48px',
-                  maxHeight: '128px',
+                  minHeight: '40px',
+                  maxHeight: '96px',
                 }}
                 disabled={sending || isRecording}
               />
@@ -1052,29 +1053,29 @@ export default function ChatPage() {
               <button
                 type="submit"
                 disabled={sending}
-                className="bg-emerald-600 hover:bg-emerald-700 disabled:bg-slate-300 disabled:cursor-not-allowed text-white p-3.5 rounded-2xl transition-all shadow-sm disabled:shadow-none flex-shrink-0"
+                className="bg-emerald-600 hover:bg-emerald-700 disabled:bg-slate-300 disabled:cursor-not-allowed text-white p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl transition-all shadow-sm disabled:shadow-none flex-shrink-0"
               >
                 {sending ? (
-                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                 ) : (
-                  <Send size={20} />
+                  <Send size={18} className="sm:w-5 sm:h-5" />
                 )}
               </button>
             ) : (
               <button
                 type="button"
                 onClick={isRecording ? stopRecording : startRecording}
-                className={`p-3.5 rounded-2xl transition-all shadow-sm flex-shrink-0 ${
+                className={`p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl transition-all shadow-sm flex-shrink-0 ${
                   isRecording 
                     ? 'bg-red-600 hover:bg-red-700 text-white'
                     : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
                 }`}
               >
-                <Mic size={20} />
+                <Mic size={18} className="sm:w-5 sm:h-5" />
               </button>
             )}
           </div>
-          <p className="text-xs text-slate-500 mt-1 px-1">
+          <p className="text-xs text-slate-500 mt-1 px-1 hidden sm:block">
             Presiona Enter para enviar, Shift+Enter para nueva línea
           </p>
         </form>

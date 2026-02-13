@@ -199,10 +199,10 @@ export default function MensajesTab({ profile, onUnreadCountChange }: MensajesTa
 
   if (loading) {
     return (
-      <div className="flex justify-center py-12">
+      <div className="flex justify-center py-8 sm:py-12">
         <div className="text-center">
-          <div className="w-12 h-12 border-3 border-slate-200 border-t-emerald-600 rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-slate-600 font-medium">Cargando conversaciones...</p>
+          <div className="w-10 h-10 sm:w-12 sm:h-12 border-3 border-slate-200 border-t-emerald-600 rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-slate-600 font-medium text-sm sm:text-base">Cargando conversaciones...</p>
         </div>
       </div>
     )
@@ -210,10 +210,10 @@ export default function MensajesTab({ profile, onUnreadCountChange }: MensajesTa
 
   if (conversaciones.length === 0) {
     return (
-      <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-16 text-center">
-        <MessageCircle size={64} className="mx-auto text-slate-300 mb-4" />
-        <h3 className="text-xl font-bold text-slate-900 mb-2">No tienes conversaciones</h3>
-        <p className="text-slate-600">
+      <div className="bg-white rounded-xl sm:rounded-2xl shadow-sm border border-slate-200 p-10 sm:p-16 text-center">
+        <MessageCircle size={48} className="mx-auto text-slate-300 mb-4 sm:w-16 sm:h-16" />
+        <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-2">No tienes conversaciones</h3>
+        <p className="text-sm sm:text-base text-slate-600">
           Cuando contactes a alguien desde una publicación, las conversaciones aparecerán aquí
         </p>
       </div>
@@ -222,21 +222,21 @@ export default function MensajesTab({ profile, onUnreadCountChange }: MensajesTa
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-0 mb-4 sm:mb-6">
         <div>
-          <h2 className="text-3xl font-bold text-slate-900 mb-1 tracking-tight">Mensajes</h2>
-          <p className="text-slate-600">
+          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-1 tracking-tight">Mensajes</h2>
+          <p className="text-sm sm:text-base text-slate-600">
             {conversaciones.length} conversacion{conversaciones.length !== 1 ? 'es' : ''}
           </p>
         </div>
         {conversaciones.some(c => (c.mensajes_no_leidos ?? 0) > 0) && (
-          <div className="bg-red-500 text-white px-4 py-2 rounded-xl font-bold text-sm shadow-sm">
+          <div className="bg-red-500 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl font-bold text-xs sm:text-sm shadow-sm self-start sm:self-auto">
             {conversaciones.reduce((sum, c) => sum + (c.mensajes_no_leidos ?? 0), 0)} sin leer
           </div>
         )}
       </div>
 
-      <div className="space-y-3">
+      <div className="space-y-2 sm:space-y-3">
         {conversaciones.map((conv) => {
           const hasUnread = (conv.mensajes_no_leidos ?? 0) > 0
           const isOnline = conv.otro_usuario_online ?? false
@@ -248,17 +248,17 @@ export default function MensajesTab({ profile, onUnreadCountChange }: MensajesTa
               animate={{ opacity: 1, y: 0 }}
               whileHover={{ scale: 1.01 }}
               onClick={() => router.push(`/chat/${conv.id}`)}
-              className={`bg-white rounded-2xl shadow-sm border transition-all duration-200 p-4 cursor-pointer ${
+              className={`bg-white rounded-xl sm:rounded-2xl shadow-sm border transition-all duration-200 p-3 sm:p-4 cursor-pointer ${
                 hasUnread 
                   ? "border-emerald-300 shadow-md hover:shadow-lg" 
                   : "border-slate-200 hover:border-slate-300 hover:shadow-md"
               }`}
             >
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-3 sm:space-x-4">
                 {/* Avatar con indicador de en línea */}
                 <div className="relative flex-shrink-0">
                   {conv.otro_usuario?.foto_url || conv.otro_usuario?.logo_url ? (
-                    <div className="relative w-14 h-14 rounded-xl overflow-hidden ring-2 ring-slate-100">
+                    <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl overflow-hidden ring-2 ring-slate-100">
                       <Image
                         src={conv.otro_usuario.foto_url || conv.otro_usuario.logo_url || ""}
                         alt="Avatar"
@@ -267,27 +267,27 @@ export default function MensajesTab({ profile, onUnreadCountChange }: MensajesTa
                       />
                     </div>
                   ) : (
-                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center ring-2 ring-slate-100">
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center ring-2 ring-slate-100">
                       {conv.otro_usuario?.rol === "jugador" ? (
-                        <User size={28} className="text-slate-600" />
+                        <User size={24} className="text-slate-600 sm:w-7 sm:h-7" />
                       ) : (
-                        <Users size={28} className="text-slate-600" />
+                        <Users size={24} className="text-slate-600 sm:w-7 sm:h-7" />
                       )}
                     </div>
                   )}
                   {/* Punto verde si está en línea */}
                   {isOnline && (
-                    <div className="absolute bottom-0 right-0 w-4 h-4 bg-emerald-500 rounded-full border-2 border-white"></div>
+                    <div className="absolute bottom-0 right-0 w-3 h-3 sm:w-4 sm:h-4 bg-emerald-500 rounded-full border-2 border-white"></div>
                   )}
                 </div>
 
                 {/* Contenido */}
                 <div className="flex-1 min-w-0">
-                  <div className="flex justify-between items-start mb-1">
-                    <h3 className={`font-bold truncate ${hasUnread ? "text-slate-900" : "text-slate-800"}`}>
+                  <div className="flex justify-between items-start mb-1 gap-2">
+                    <h3 className={`font-bold truncate text-sm sm:text-base ${hasUnread ? "text-slate-900" : "text-slate-800"}`}>
                       {conv.otro_usuario?.nombre_completo || conv.otro_usuario?.nombre_club || "Usuario"}
                     </h3>
-                    <span className="text-xs text-slate-500 whitespace-nowrap ml-2">
+                    <span className="text-xs text-slate-500 whitespace-nowrap flex-shrink-0">
                       {conv.ultimo_mensaje && new Date(conv.ultimo_mensaje.created_at).toLocaleDateString("es-ES", {
                         day: "numeric",
                         month: "short",
@@ -298,19 +298,19 @@ export default function MensajesTab({ profile, onUnreadCountChange }: MensajesTa
                   {/* Estado de presencia */}
                   <div className="flex items-center space-x-1.5 mb-1">
                     {isOnline && (
-                      <Circle size={8} className="text-emerald-500 fill-emerald-500" />
+                      <Circle size={7} className="text-emerald-500 fill-emerald-500 sm:w-2 sm:h-2" />
                     )}
                     <p className={`text-xs ${isOnline ? 'text-emerald-600 font-medium' : 'text-slate-500'}`}>
                       {getLastSeenText(isOnline, conv.otro_usuario_last_seen ?? null)}
                     </p>
                   </div>
 
-                  <p className="text-sm text-slate-600 truncate mb-1">
+                  <p className="text-xs sm:text-sm text-slate-600 truncate mb-1">
                     📋 {conv.publicaciones?.title}
                   </p>
 
-                  <div className="flex justify-between items-center">
-                    <p className={`text-sm truncate flex-1 ${hasUnread ? "font-semibold text-slate-900" : "text-slate-600"}`}>
+                  <div className="flex justify-between items-center gap-2">
+                    <p className={`text-xs sm:text-sm truncate flex-1 ${hasUnread ? "font-semibold text-slate-900" : "text-slate-600"}`}>
                       {conv.ultimo_mensaje ? (
                         <>
                           {conv.ultimo_mensaje.remitente_id === profile.id && (
@@ -324,7 +324,7 @@ export default function MensajesTab({ profile, onUnreadCountChange }: MensajesTa
                     </p>
 
                     {hasUnread && (
-                      <span className="ml-2 bg-emerald-600 text-white text-xs font-bold px-2.5 py-1 rounded-full flex-shrink-0 shadow-sm">
+                      <span className="bg-emerald-600 text-white text-xs font-bold px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full flex-shrink-0 shadow-sm">
                         {conv.mensajes_no_leidos}
                       </span>
                     )}

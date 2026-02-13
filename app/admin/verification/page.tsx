@@ -321,23 +321,26 @@ export default function AdminVerificationPage() {
     switch (status) {
       case 'pending':
         return (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-100 text-amber-700 rounded-lg text-sm font-semibold border border-amber-200">
-            <Clock size={14} />
-            Pendiente
+          <span className="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 bg-amber-100 text-amber-700 rounded-lg text-xs sm:text-sm font-semibold border border-amber-200">
+            <Clock size={12} className="sm:w-[14px] sm:h-[14px]" />
+            <span className="hidden sm:inline">Pendiente</span>
+            <span className="sm:hidden">Pend.</span>
           </span>
         )
       case 'approved':
         return (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-100 text-emerald-700 rounded-lg text-sm font-semibold border border-emerald-200">
-            <CheckCircle2 size={14} />
-            Aprobada
+          <span className="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 bg-emerald-100 text-emerald-700 rounded-lg text-xs sm:text-sm font-semibold border border-emerald-200">
+            <CheckCircle2 size={12} className="sm:w-[14px] sm:h-[14px]" />
+            <span className="hidden sm:inline">Aprobada</span>
+            <span className="sm:hidden">Apro.</span>
           </span>
         )
       case 'rejected':
         return (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-red-100 text-red-700 rounded-lg text-sm font-semibold border border-red-200">
-            <XCircle size={14} />
-            Rechazada
+          <span className="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 bg-red-100 text-red-700 rounded-lg text-xs sm:text-sm font-semibold border border-red-200">
+            <XCircle size={12} className="sm:w-[14px] sm:h-[14px]" />
+            <span className="hidden sm:inline">Rechazada</span>
+            <span className="sm:hidden">Rech.</span>
           </span>
         )
     }
@@ -367,10 +370,10 @@ export default function AdminVerificationPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ background: 'linear-gradient(to bottom right, #f8fafc, #f1f5f9)' }}>
+      <div className="min-h-screen flex items-center justify-center px-4" style={{ background: 'linear-gradient(to bottom right, #f8fafc, #f1f5f9)' }}>
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-slate-200 border-t-emerald-600 rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-slate-600 font-semibold text-lg">Verificando permisos...</p>
+          <div className="w-12 h-12 sm:w-16 sm:h-16 border-4 border-slate-200 border-t-emerald-600 rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-slate-600 font-semibold text-base sm:text-lg">Verificando permisos...</p>
         </div>
       </div>
     )
@@ -379,26 +382,26 @@ export default function AdminVerificationPage() {
   if (!isAdmin) {
     return (
       <div className="min-h-screen flex items-center justify-center p-4" style={{ background: 'linear-gradient(to bottom right, #f8fafc, #f1f5f9)' }}>
-        <div className="bg-white rounded-2xl shadow-xl border border-slate-200 p-8 max-w-2xl w-full">
+        <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl border border-slate-200 p-6 sm:p-8 max-w-2xl w-full">
           <div className="text-center">
-            <div className="mx-auto w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mb-6">
-              <Lock size={40} className="text-red-600" />
+            <div className="mx-auto w-16 h-16 sm:w-20 sm:h-20 bg-red-100 rounded-full flex items-center justify-center mb-4 sm:mb-6">
+              <Lock size={32} className="text-red-600 sm:w-10 sm:h-10" />
             </div>
-            <h1 className="text-2xl font-bold text-slate-900 mb-3">Acceso Restringido</h1>
-            <p className="text-slate-600 mb-6">
+            <h1 className="text-xl sm:text-2xl font-bold text-slate-900 mb-2 sm:mb-3">Acceso Restringido</h1>
+            <p className="text-sm sm:text-base text-slate-600 mb-4 sm:mb-6">
               No tienes permisos de administrador para acceder a esta página.
             </p>
             
             {adminCheckError && (
-              <div className="bg-amber-50 rounded-xl p-4 border border-amber-200 mb-6 text-left">
-                <div className="flex items-start gap-3">
-                  <AlertCircle className="text-amber-600 flex-shrink-0 mt-0.5" size={20} />
-                  <div className="flex-1">
-                    <p className="text-sm font-semibold text-amber-900 mb-2">Error Técnico:</p>
-                    <p className="text-sm text-amber-800 mb-3">{adminCheckError}</p>
+              <div className="bg-amber-50 rounded-xl p-3 sm:p-4 border border-amber-200 mb-4 sm:mb-6 text-left">
+                <div className="flex items-start gap-2 sm:gap-3">
+                  <AlertCircle className="text-amber-600 flex-shrink-0 mt-0.5" size={18} />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs sm:text-sm font-semibold text-amber-900 mb-2">Error Técnico:</p>
+                    <p className="text-xs sm:text-sm text-amber-800 mb-2 sm:mb-3 break-words">{adminCheckError}</p>
                     
                     {adminCheckError.includes("fix-admin-rls.sql") && (
-                      <div className="bg-white rounded-lg p-3 border border-amber-300">
+                      <div className="bg-white rounded-lg p-2 sm:p-3 border border-amber-300">
                         <p className="text-xs font-semibold text-slate-700 mb-2">Solución:</p>
                         <ol className="text-xs text-slate-600 space-y-1 list-decimal list-inside">
                           <li>Descarga el archivo SQL generado</li>
@@ -413,20 +416,20 @@ export default function AdminVerificationPage() {
               </div>
             )}
             
-            <div className="bg-red-50 rounded-xl p-4 border border-red-200 mb-6">
-              <p className="text-sm text-red-800">
+            <div className="bg-red-50 rounded-xl p-3 sm:p-4 border border-red-200 mb-4 sm:mb-6">
+              <p className="text-xs sm:text-sm text-red-800">
                 <span className="font-semibold">Solo usuarios con rol de administrador</span> pueden acceder al panel de verificación.
               </p>
             </div>
             
             <button
               onClick={() => router.push("/home")}
-              className="w-full bg-gradient-to-r from-slate-700 to-slate-900 hover:from-slate-800 hover:to-slate-950 text-white py-3 rounded-xl font-semibold transition-all shadow-sm hover:shadow-lg"
+              className="w-full bg-gradient-to-r from-slate-700 to-slate-900 hover:from-slate-800 hover:to-slate-950 text-white py-2.5 sm:py-3 rounded-xl font-semibold transition-all shadow-sm hover:shadow-lg text-sm sm:text-base"
             >
               Volver al Inicio
             </button>
             
-            <p className="text-sm text-slate-500 mt-4">
+            <p className="text-xs sm:text-sm text-slate-500 mt-3 sm:mt-4">
               Si crees que esto es un error, contacta al administrador del sistema.
             </p>
           </div>
@@ -437,22 +440,22 @@ export default function AdminVerificationPage() {
 
   return (
     <div className="min-h-screen" style={{ background: 'linear-gradient(to bottom right, #f8fafc, #f1f5f9)' }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-4 sm:py-6 lg:py-8">
         
         {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="p-3 bg-gradient-to-br from-emerald-600 to-emerald-700 rounded-xl shadow-lg">
-              <Shield size={32} className="text-white" />
+        <div className="mb-6 sm:mb-8">
+          <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+            <div className="p-2 sm:p-3 bg-gradient-to-br from-emerald-600 to-emerald-700 rounded-lg sm:rounded-xl shadow-lg flex-shrink-0">
+              <Shield size={24} className="text-white sm:w-8 sm:h-8" />
             </div>
-            <div>
-              <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Panel de Verificación</h1>
-              <p className="text-slate-600">Gestiona las solicitudes de verificación de clubes</p>
-              <div className="flex items-center gap-2 mt-2">
-                <span className="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full font-semibold">
+            <div className="flex-1 min-w-0">
+              <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900 tracking-tight truncate">Panel de Verificación</h1>
+              <p className="text-xs sm:text-sm lg:text-base text-slate-600 truncate">Gestiona las solicitudes de verificación de clubes</p>
+              <div className="flex items-center gap-1.5 sm:gap-2 mt-1 sm:mt-2 flex-wrap">
+                <span className="text-xs bg-emerald-100 text-emerald-700 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full font-semibold">
                   {adminData?.role || 'Admin'}
                 </span>
-                <span className="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded-full">
+                <span className="text-xs bg-slate-100 text-slate-600 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full truncate max-w-[200px]">
                   {currentUser?.email}
                 </span>
               </div>
@@ -460,46 +463,46 @@ export default function AdminVerificationPage() {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
-              <p className="text-sm font-semibold text-slate-600 mb-1">Total</p>
-              <p className="text-3xl font-bold text-slate-900">{stats.total}</p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 lg:gap-4">
+            <div className="bg-white rounded-lg sm:rounded-xl shadow-sm border border-slate-200 p-3 sm:p-4">
+              <p className="text-xs sm:text-sm font-semibold text-slate-600 mb-0.5 sm:mb-1">Total</p>
+              <p className="text-2xl sm:text-3xl font-bold text-slate-900">{stats.total}</p>
             </div>
-            <div className="bg-amber-50 rounded-xl shadow-sm border border-amber-200 p-4">
-              <p className="text-sm font-semibold text-amber-700 mb-1">Pendientes</p>
-              <p className="text-3xl font-bold text-amber-900">{stats.pending}</p>
+            <div className="bg-amber-50 rounded-lg sm:rounded-xl shadow-sm border border-amber-200 p-3 sm:p-4">
+              <p className="text-xs sm:text-sm font-semibold text-amber-700 mb-0.5 sm:mb-1">Pendientes</p>
+              <p className="text-2xl sm:text-3xl font-bold text-amber-900">{stats.pending}</p>
             </div>
-            <div className="bg-emerald-50 rounded-xl shadow-sm border border-emerald-200 p-4">
-              <p className="text-sm font-semibold text-emerald-700 mb-1">Aprobadas</p>
-              <p className="text-3xl font-bold text-emerald-900">{stats.approved}</p>
+            <div className="bg-emerald-50 rounded-lg sm:rounded-xl shadow-sm border border-emerald-200 p-3 sm:p-4">
+              <p className="text-xs sm:text-sm font-semibold text-emerald-700 mb-0.5 sm:mb-1">Aprobadas</p>
+              <p className="text-2xl sm:text-3xl font-bold text-emerald-900">{stats.approved}</p>
             </div>
-            <div className="bg-red-50 rounded-xl shadow-sm border border-red-200 p-4">
-              <p className="text-sm font-semibold text-red-700 mb-1">Rechazadas</p>
-              <p className="text-3xl font-bold text-red-900">{stats.rejected}</p>
+            <div className="bg-red-50 rounded-lg sm:rounded-xl shadow-sm border border-red-200 p-3 sm:p-4">
+              <p className="text-xs sm:text-sm font-semibold text-red-700 mb-0.5 sm:mb-1">Rechazadas</p>
+              <p className="text-2xl sm:text-3xl font-bold text-red-900">{stats.rejected}</p>
             </div>
           </div>
         </div>
 
         {/* Filtros */}
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
-          <div className="flex flex-col lg:flex-row gap-4">
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6 mb-4 sm:mb-6">
+          <div className="flex flex-col lg:flex-row gap-3 sm:gap-4">
             <div className="flex-1">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
                 <input
                   type="text"
-                  placeholder="Buscar por club, contacto, dirección..."
+                  placeholder="Buscar..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all"
+                  className="w-full pl-10 pr-3 sm:pr-4 py-2.5 sm:py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all text-sm sm:text-base"
                 />
               </div>
             </div>
 
-            <div className="flex gap-2 flex-wrap">
+            <div className="flex gap-1.5 sm:gap-2 flex-wrap">
               <button
                 onClick={() => setFilter('all')}
-                className={`px-4 py-3 rounded-xl font-semibold transition-all ${
+                className={`px-2.5 sm:px-4 py-2 sm:py-3 rounded-lg sm:rounded-xl font-semibold transition-all text-xs sm:text-sm ${
                   filter === 'all'
                     ? 'bg-slate-900 text-white shadow-lg'
                     : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
@@ -509,40 +512,43 @@ export default function AdminVerificationPage() {
               </button>
               <button
                 onClick={() => setFilter('pending')}
-                className={`px-4 py-3 rounded-xl font-semibold transition-all ${
+                className={`px-2.5 sm:px-4 py-2 sm:py-3 rounded-lg sm:rounded-xl font-semibold transition-all text-xs sm:text-sm ${
                   filter === 'pending'
                     ? 'bg-amber-500 text-white shadow-lg'
                     : 'bg-amber-100 text-amber-700 hover:bg-amber-200'
                 }`}
               >
-                Pendientes ({stats.pending})
+                <span className="hidden sm:inline">Pendientes</span>
+                <span className="sm:hidden">Pend.</span> ({stats.pending})
               </button>
               <button
                 onClick={() => setFilter('approved')}
-                className={`px-4 py-3 rounded-xl font-semibold transition-all ${
+                className={`px-2.5 sm:px-4 py-2 sm:py-3 rounded-lg sm:rounded-xl font-semibold transition-all text-xs sm:text-sm ${
                   filter === 'approved'
                     ? 'bg-emerald-500 text-white shadow-lg'
                     : 'bg-emerald-100 text-emerald-700 hover:bg-emerald-200'
                 }`}
               >
-                Aprobadas ({stats.approved})
+                <span className="hidden sm:inline">Aprobadas</span>
+                <span className="sm:hidden">Apro.</span> ({stats.approved})
               </button>
               <button
                 onClick={() => setFilter('rejected')}
-                className={`px-4 py-3 rounded-xl font-semibold transition-all ${
+                className={`px-2.5 sm:px-4 py-2 sm:py-3 rounded-lg sm:rounded-xl font-semibold transition-all text-xs sm:text-sm ${
                   filter === 'rejected'
                     ? 'bg-red-500 text-white shadow-lg'
                     : 'bg-red-100 text-red-700 hover:bg-red-200'
                 }`}
               >
-                Rechazadas ({stats.rejected})
+                <span className="hidden sm:inline">Rechazadas</span>
+                <span className="sm:hidden">Rech.</span> ({stats.rejected})
               </button>
               
               <button
                 onClick={exportToCSV}
-                className="px-4 py-3 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-xl font-semibold transition-all flex items-center gap-2"
+                className="px-2.5 sm:px-4 py-2 sm:py-3 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-lg sm:rounded-xl font-semibold transition-all flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm"
               >
-                <Download size={18} />
+                <Download size={16} className="sm:w-[18px] sm:h-[18px]" />
                 <span className="hidden md:inline">Exportar</span>
               </button>
             </div>
@@ -551,12 +557,12 @@ export default function AdminVerificationPage() {
 
         {/* Lista de Solicitudes */}
         {filteredRequests.length === 0 ? (
-          <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-16 text-center">
-            <div className="text-6xl mb-4">📋</div>
-            <h3 className="text-2xl font-bold text-slate-900 mb-2">
+          <div className="bg-white rounded-xl sm:rounded-2xl shadow-sm border border-slate-200 p-10 sm:p-16 text-center">
+            <div className="text-4xl sm:text-6xl mb-3 sm:mb-4">📋</div>
+            <h3 className="text-lg sm:text-2xl font-bold text-slate-900 mb-2">
               {searchTerm ? "Sin resultados" : "No hay solicitudes"}
             </h3>
-            <p className="text-slate-600">
+            <p className="text-sm sm:text-base text-slate-600">
               {searchTerm 
                 ? "Intenta con otros términos de búsqueda" 
                 : filter === 'pending' 
@@ -566,7 +572,7 @@ export default function AdminVerificationPage() {
             </p>
           </div>
         ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
             <AnimatePresence mode="popLayout">
               {filteredRequests.map((request) => (
                 <motion.div
@@ -575,14 +581,14 @@ export default function AdminVerificationPage() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   layout
-                  className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-lg transition-all cursor-pointer group"
+                  className="bg-white rounded-lg sm:rounded-xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-lg transition-all cursor-pointer group"
                   onClick={() => setSelectedRequest(request)}
                 >
-                  <div className="p-6">
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="flex items-center gap-3 flex-1 min-w-0">
+                  <div className="p-4 sm:p-6">
+                    <div className="flex items-start justify-between mb-3 sm:mb-4 gap-2">
+                      <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
                         {getProfile(request)?.logo_url ? (
-                          <div className="relative w-14 h-14 rounded-xl overflow-hidden ring-2 ring-slate-200 flex-shrink-0">
+                          <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl overflow-hidden ring-2 ring-slate-200 flex-shrink-0">
                             <Image
                               src={getProfile(request).logo_url}
                               alt="Logo"
@@ -592,12 +598,12 @@ export default function AdminVerificationPage() {
                             />
                           </div>
                         ) : (
-                          <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center ring-2 ring-slate-200 flex-shrink-0">
-                            <User size={28} className="text-slate-400" />
+                          <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center ring-2 ring-slate-200 flex-shrink-0">
+                            <User size={24} className="text-slate-400 sm:w-7 sm:h-7" />
                           </div>
                         )}
                         <div className="flex-1 min-w-0">
-                          <h3 className="font-bold text-slate-900 truncate text-lg">
+                          <h3 className="font-bold text-slate-900 truncate text-sm sm:text-base lg:text-lg">
                             {getProfile(request)?.nombre_club}
                           </h3>
                           <p className="text-xs text-slate-500 truncate">{request.club_legal_name}</p>
@@ -605,25 +611,25 @@ export default function AdminVerificationPage() {
                       </div>
                     </div>
 
-                    <div className="mb-4">
+                    <div className="mb-3 sm:mb-4">
                       {getStatusBadge(request.status)}
                     </div>
 
-                    <div className="space-y-2 text-sm mb-4">
+                    <div className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm mb-3 sm:mb-4">
                       <div className="flex items-center gap-2 text-slate-600">
-                        <MapPin size={14} className="flex-shrink-0" />
+                        <MapPin size={12} className="flex-shrink-0 sm:w-[14px] sm:h-[14px]" />
                         <span className="truncate">{request.club_address}</span>
                       </div>
                       <div className="flex items-center gap-2 text-slate-600">
-                        <User size={14} className="flex-shrink-0" />
+                        <User size={12} className="flex-shrink-0 sm:w-[14px] sm:h-[14px]" />
                         <span className="truncate">{request.contact_person}</span>
                       </div>
                       <div className="flex items-center gap-2 text-slate-600">
-                        <Phone size={14} className="flex-shrink-0" />
+                        <Phone size={12} className="flex-shrink-0 sm:w-[14px] sm:h-[14px]" />
                         <span>{request.contact_phone}</span>
                       </div>
                       <div className="flex items-center gap-2 text-slate-600">
-                        <Calendar size={14} className="flex-shrink-0" />
+                        <Calendar size={12} className="flex-shrink-0 sm:w-[14px] sm:h-[14px]" />
                         <span>
                           {new Date(request.created_at).toLocaleDateString('es-ES', {
                             day: 'numeric',
@@ -635,20 +641,20 @@ export default function AdminVerificationPage() {
                     </div>
 
                     {request.status === 'pending' && (
-                      <button className="w-full bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white py-3 rounded-xl font-semibold transition-all shadow-sm group-hover:shadow-lg flex items-center justify-center gap-2">
+                      <button className="w-full bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white py-2.5 sm:py-3 rounded-lg sm:rounded-xl font-semibold transition-all shadow-sm group-hover:shadow-lg flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-sm">
                         Revisar Solicitud
-                        <ExternalLink size={16} />
+                        <ExternalLink size={14} className="sm:w-4 sm:h-4" />
                       </button>
                     )}
                     
                     {request.status === 'approved' && (
-                      <div className="text-center text-sm text-emerald-700 font-semibold py-2">
+                      <div className="text-center text-xs sm:text-sm text-emerald-700 font-semibold py-2">
                         Aprobada el {new Date(request.reviewed_at!).toLocaleDateString('es-ES')}
                       </div>
                     )}
                     
                     {request.status === 'rejected' && (
-                      <div className="text-center text-sm text-red-700 font-semibold py-2">
+                      <div className="text-center text-xs sm:text-sm text-red-700 font-semibold py-2">
                         Rechazada el {new Date(request.reviewed_at!).toLocaleDateString('es-ES')}
                       </div>
                     )}
@@ -663,7 +669,7 @@ export default function AdminVerificationPage() {
         <AnimatePresence>
           {selectedRequest && (
             <div
-              className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4 backdrop-blur-sm"
+              className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-3 sm:p-4 backdrop-blur-sm"
               onClick={() => setSelectedRequest(null)}
             >
               <motion.div
@@ -671,22 +677,22 @@ export default function AdminVerificationPage() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 onClick={(e) => e.stopPropagation()}
-                className="bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto"
+                className="bg-white rounded-xl sm:rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto"
               >
                 {/* Header del Modal */}
-                <div className="bg-gradient-to-r from-emerald-600 to-emerald-700 p-6 text-white sticky top-0 z-10">
-                  <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-2xl font-bold">Detalle de Solicitud</h2>
+                <div className="bg-gradient-to-r from-emerald-600 to-emerald-700 p-4 sm:p-6 text-white sticky top-0 z-10">
+                  <div className="flex items-center justify-between mb-3 sm:mb-4">
+                    <h2 className="text-lg sm:text-xl lg:text-2xl font-bold">Detalle de Solicitud</h2>
                     <button
                       onClick={() => setSelectedRequest(null)}
-                      className="text-white/80 hover:text-white hover:bg-white/10 rounded-lg p-2 transition-all"
+                      className="text-white/80 hover:text-white hover:bg-white/10 rounded-lg p-1.5 sm:p-2 transition-all"
                     >
                       ✕
                     </button>
                   </div>
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2 sm:gap-3">
                     {getProfile(selectedRequest)?.logo_url && (
-                      <div className="relative w-16 h-16 rounded-xl overflow-hidden ring-2 ring-white/30">
+                      <div className="relative w-12 h-12 sm:w-16 sm:h-16 rounded-lg sm:rounded-xl overflow-hidden ring-2 ring-white/30 flex-shrink-0">
                         <Image
                           src={getProfile(selectedRequest).logo_url}
                           alt="Logo"
@@ -696,93 +702,93 @@ export default function AdminVerificationPage() {
                         />
                       </div>
                     )}
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold">{getProfile(selectedRequest)?.nombre_club}</h3>
-                      <p className="text-emerald-100 text-sm">{selectedRequest.club_legal_name}</p>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base sm:text-lg lg:text-xl font-bold truncate">{getProfile(selectedRequest)?.nombre_club}</h3>
+                      <p className="text-emerald-100 text-xs sm:text-sm truncate">{selectedRequest.club_legal_name}</p>
                     </div>
                     {getStatusBadge(selectedRequest.status)}
                   </div>
                 </div>
 
                 {/* Contenido del Modal */}
-                <div className="p-6 space-y-6">
+                <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
                   {/* Información del Club */}
                   <div>
-                    <h3 className="font-bold text-slate-900 mb-3 flex items-center gap-2">
-                      <div className="p-2 bg-slate-100 rounded-lg">
-                        <User size={18} className="text-slate-700" />
+                    <h3 className="font-bold text-slate-900 mb-2 sm:mb-3 flex items-center gap-2 text-sm sm:text-base">
+                      <div className="p-1.5 sm:p-2 bg-slate-100 rounded-lg">
+                        <User size={16} className="text-slate-700 sm:w-[18px] sm:h-[18px]" />
                       </div>
                       Información del Club
                     </h3>
-                    <div className="bg-slate-50 rounded-xl p-4 space-y-3 border border-slate-200">
-                      <div className="grid md:grid-cols-2 gap-4">
+                    <div className="bg-slate-50 rounded-xl p-3 sm:p-4 space-y-2 sm:space-y-3 border border-slate-200">
+                      <div className="grid md:grid-cols-2 gap-3 sm:gap-4">
                         <div>
                           <p className="text-xs font-semibold text-slate-500 mb-1">Nombre en Perfil</p>
-                          <p className="text-slate-900 font-medium">{getProfile(selectedRequest)?.nombre_club}</p>
+                          <p className="text-xs sm:text-sm text-slate-900 font-medium break-words">{getProfile(selectedRequest)?.nombre_club}</p>
                         </div>
                         <div>
                           <p className="text-xs font-semibold text-slate-500 mb-1">Nombre Legal</p>
-                          <p className="text-slate-900 font-medium">{selectedRequest.club_legal_name}</p>
+                          <p className="text-xs sm:text-sm text-slate-900 font-medium break-words">{selectedRequest.club_legal_name}</p>
                         </div>
                       </div>
                       <div>
                         <p className="text-xs font-semibold text-slate-500 mb-1">Dirección</p>
-                        <p className="text-slate-900 font-medium">{selectedRequest.club_address}</p>
+                        <p className="text-xs sm:text-sm text-slate-900 font-medium break-words">{selectedRequest.club_address}</p>
                       </div>
                       <div>
                         <p className="text-xs font-semibold text-slate-500 mb-1">Ubicación en Perfil</p>
-                        <p className="text-slate-900 font-medium">{getProfile(selectedRequest)?.ubicacion}</p>
+                        <p className="text-xs sm:text-sm text-slate-900 font-medium">{getProfile(selectedRequest)?.ubicacion}</p>
                       </div>
                     </div>
                   </div>
 
                   {/* Información de Contacto */}
                   <div>
-                    <h3 className="font-bold text-slate-900 mb-3 flex items-center gap-2">
-                      <div className="p-2 bg-slate-100 rounded-lg">
-                        <Phone size={18} className="text-slate-700" />
+                    <h3 className="font-bold text-slate-900 mb-2 sm:mb-3 flex items-center gap-2 text-sm sm:text-base">
+                      <div className="p-1.5 sm:p-2 bg-slate-100 rounded-lg">
+                        <Phone size={16} className="text-slate-700 sm:w-[18px] sm:h-[18px]" />
                       </div>
                       Información de Contacto
                     </h3>
-                    <div className="bg-slate-50 rounded-xl p-4 space-y-3 border border-slate-200">
-                      <div className="grid md:grid-cols-2 gap-4">
+                    <div className="bg-slate-50 rounded-xl p-3 sm:p-4 space-y-2 sm:space-y-3 border border-slate-200">
+                      <div className="grid md:grid-cols-2 gap-3 sm:gap-4">
                         <div>
                           <p className="text-xs font-semibold text-slate-500 mb-1">Persona de Contacto</p>
-                          <p className="text-slate-900 font-medium">{selectedRequest.contact_person}</p>
+                          <p className="text-xs sm:text-sm text-slate-900 font-medium break-words">{selectedRequest.contact_person}</p>
                         </div>
                         <div>
                           <p className="text-xs font-semibold text-slate-500 mb-1">Teléfono</p>
-                          <p className="text-slate-900 font-medium">{selectedRequest.contact_phone}</p>
+                          <p className="text-xs sm:text-sm text-slate-900 font-medium">{selectedRequest.contact_phone}</p>
                         </div>
                       </div>
                       <div>
                         <p className="text-xs font-semibold text-slate-500 mb-1">Email</p>
-                        <p className="text-slate-900 font-medium">{getProfile(selectedRequest)?.email}</p>
+                        <p className="text-xs sm:text-sm text-slate-900 font-medium break-all">{getProfile(selectedRequest)?.email}</p>
                       </div>
                     </div>
                   </div>
 
                   {/* Documento */}
                   <div>
-                    <h3 className="font-bold text-slate-900 mb-3 flex items-center gap-2">
-                      <div className="p-2 bg-slate-100 rounded-lg">
-                        <FileText size={18} className="text-slate-700" />
+                    <h3 className="font-bold text-slate-900 mb-2 sm:mb-3 flex items-center gap-2 text-sm sm:text-base">
+                      <div className="p-1.5 sm:p-2 bg-slate-100 rounded-lg">
+                        <FileText size={16} className="text-slate-700 sm:w-[18px] sm:h-[18px]" />
                       </div>
                       Documento de Verificación
                     </h3>
-                    <div className="bg-blue-50 rounded-xl p-4 border border-blue-200">
-                      <p className="text-sm font-semibold text-blue-900 mb-3">
+                    <div className="bg-blue-50 rounded-xl p-3 sm:p-4 border border-blue-200">
+                      <p className="text-xs sm:text-sm font-semibold text-blue-900 mb-2 sm:mb-3">
                         Tipo: {selectedRequest.document_type}
                       </p>
                       <a
                         href={selectedRequest.document_url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition-all shadow-sm hover:shadow-lg"
+                        className="inline-flex items-center gap-1.5 sm:gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg sm:rounded-xl font-semibold transition-all shadow-sm hover:shadow-lg text-xs sm:text-sm"
                       >
-                        <FileText size={18} />
+                        <FileText size={16} className="sm:w-[18px] sm:h-[18px]" />
                         Ver Documento
-                        <ExternalLink size={16} />
+                        <ExternalLink size={14} className="sm:w-4 sm:h-4" />
                       </a>
                     </div>
                   </div>
@@ -790,14 +796,14 @@ export default function AdminVerificationPage() {
                   {/* Información Adicional */}
                   {selectedRequest.additional_info && (
                     <div>
-                      <h3 className="font-bold text-slate-900 mb-3 flex items-center gap-2">
-                        <div className="p-2 bg-slate-100 rounded-lg">
-                          <AlertCircle size={18} className="text-slate-700" />
+                      <h3 className="font-bold text-slate-900 mb-2 sm:mb-3 flex items-center gap-2 text-sm sm:text-base">
+                        <div className="p-1.5 sm:p-2 bg-slate-100 rounded-lg">
+                          <AlertCircle size={16} className="text-slate-700 sm:w-[18px] sm:h-[18px]" />
                         </div>
                         Información Adicional
                       </h3>
-                      <div className="bg-slate-50 rounded-xl p-4 border border-slate-200">
-                        <p className="text-slate-700 leading-relaxed">{selectedRequest.additional_info}</p>
+                      <div className="bg-slate-50 rounded-xl p-3 sm:p-4 border border-slate-200">
+                        <p className="text-xs sm:text-sm text-slate-700 leading-relaxed break-words">{selectedRequest.additional_info}</p>
                       </div>
                     </div>
                   )}
@@ -805,23 +811,23 @@ export default function AdminVerificationPage() {
                   {/* Motivo de rechazo */}
                   {selectedRequest.status === 'rejected' && selectedRequest.rejection_reason && (
                     <div>
-                      <h3 className="font-bold text-red-900 mb-3 flex items-center gap-2">
-                        <div className="p-2 bg-red-100 rounded-lg">
-                          <XCircle size={18} className="text-red-700" />
+                      <h3 className="font-bold text-red-900 mb-2 sm:mb-3 flex items-center gap-2 text-sm sm:text-base">
+                        <div className="p-1.5 sm:p-2 bg-red-100 rounded-lg">
+                          <XCircle size={16} className="text-red-700 sm:w-[18px] sm:h-[18px]" />
                         </div>
                         Motivo de Rechazo
                       </h3>
-                      <div className="bg-red-50 rounded-xl p-4 border border-red-200">
-                        <p className="text-red-800 leading-relaxed">{selectedRequest.rejection_reason}</p>
+                      <div className="bg-red-50 rounded-xl p-3 sm:p-4 border border-red-200">
+                        <p className="text-xs sm:text-sm text-red-800 leading-relaxed break-words">{selectedRequest.rejection_reason}</p>
                       </div>
                     </div>
                   )}
 
                   {/* Acciones */}
                   {selectedRequest.status === 'pending' && (
-                    <div className="space-y-4 pt-4 border-t-2 border-slate-200">
+                    <div className="space-y-3 sm:space-y-4 pt-3 sm:pt-4 border-t-2 border-slate-200">
                       <div>
-                        <label className="block text-sm font-bold text-slate-700 mb-2">
+                        <label className="block text-xs sm:text-sm font-bold text-slate-700 mb-2">
                           Motivo de Rechazo (opcional - solo si vas a rechazar)
                         </label>
                         <textarea
@@ -829,24 +835,24 @@ export default function AdminVerificationPage() {
                           onChange={(e) => setRejectionReason(e.target.value)}
                           placeholder="Ej: El documento no es legible. Por favor sube una imagen más clara."
                           rows={4}
-                          className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-transparent resize-none"
+                          className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-transparent resize-none text-xs sm:text-sm"
                         />
                       </div>
 
-                      <div className="grid grid-cols-2 gap-4">
+                      <div className="grid grid-cols-2 gap-2 sm:gap-4">
                         <button
                           onClick={() => handleReject(selectedRequest.id)}
                           disabled={processing}
-                          className="bg-red-600 hover:bg-red-700 disabled:bg-slate-300 text-white py-4 rounded-xl font-bold transition-all shadow-sm hover:shadow-lg disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                          className="bg-red-600 hover:bg-red-700 disabled:bg-slate-300 text-white py-3 sm:py-4 rounded-lg sm:rounded-xl font-bold transition-all shadow-sm hover:shadow-lg disabled:cursor-not-allowed flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-sm"
                         >
                           {processing ? (
                             <>
-                              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                              Procesando...
+                              <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                              <span className="hidden sm:inline">Procesando...</span>
                             </>
                           ) : (
                             <>
-                              <XCircle size={20} />
+                              <XCircle size={18} className="sm:w-5 sm:h-5" />
                               Rechazar
                             </>
                           )}
@@ -854,16 +860,16 @@ export default function AdminVerificationPage() {
                         <button
                           onClick={() => handleApprove(selectedRequest.id)}
                           disabled={processing}
-                          className="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 disabled:bg-slate-300 text-white py-4 rounded-xl font-bold transition-all shadow-sm hover:shadow-lg disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                          className="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 disabled:bg-slate-300 text-white py-3 sm:py-4 rounded-lg sm:rounded-xl font-bold transition-all shadow-sm hover:shadow-lg disabled:cursor-not-allowed flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-sm"
                         >
                           {processing ? (
                             <>
-                              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                              Procesando...
+                              <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                              <span className="hidden sm:inline">Procesando...</span>
                             </>
                           ) : (
                             <>
-                              <CheckCircle2 size={20} />
+                              <CheckCircle2 size={18} className="sm:w-5 sm:h-5" />
                               Aprobar
                             </>
                           )}
